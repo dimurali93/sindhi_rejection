@@ -29,3 +29,5 @@ library(spatstat.explore)
 myCol <- brewer.pal(n = 10, name = 'Paired')
 
 options(future.globals.maxSize = 3e+09)
+library(usethis)
+usethis::use_git_config(user.name="dimurali93", user.email="dimurali@ucsd.edu")
