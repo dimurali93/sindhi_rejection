@@ -1,5 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
+.RDS
+.Rds
+.csv
 .Ruserdata
-sindhi_rejection.Rproj

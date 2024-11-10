@@ -1,0 +1,102 @@
+﻿MGI Gene/Marker ID,Symbol,Name,Chr,Qualifier,Annotated Term,Context,Proteoform,Evidence,Inferred From,Reference(s),
+MGI:88140,Bcl3,B cell leukemia/lymphoma 3,7,,humoral immune response mediated by circulating immunoglobulin,,,IMP,MGI:1861796 ,J:38092 ,BCL3
+MGI:88223,C1qa,"complement component 1, q subcomponent, alpha polypeptide",4,,"complement activation, classical pathway",,,IMP,MGI:2158701 ,J:75709 ,C1QA
+MGI:88223,C1qa,"complement component 1, q subcomponent, alpha polypeptide",4,,"complement activation, classical pathway",,,ISO,CPX-1919 ,J:342607 ,C1QA
+MGI:88223,C1qa,"complement component 1, q subcomponent, alpha polypeptide",4,,"complement activation, classical pathway",,,ISO,P02745 ,J:164563 ,C1QA
+MGI:88223,C1qa,"complement component 1, q subcomponent, alpha polypeptide",4,,"complement activation, classical pathway",,,NAS,,J:320127 ,C1QA
+MGI:88224,C1qb,"complement component 1, q subcomponent, beta polypeptide",4,,"complement activation, classical pathway",,,ISO,CPX-1919 ,J:342607 ,C1QB
+MGI:88224,C1qb,"complement component 1, q subcomponent, beta polypeptide",4,,"complement activation, classical pathway",,,ISO,P02746 ,J:164563 ,C1QB
+MGI:88224,C1qb,"complement component 1, q subcomponent, beta polypeptide",4,,"complement activation, classical pathway",,,NAS,,J:320127 ,C1QB
+MGI:1194505,C1qbp,"complement component 1, q subcomponent binding protein",11,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C1QBP
+MGI:88225,C1qc,"complement component 1, q subcomponent, C chain",4,,"complement activation, classical pathway",,,ISO,CPX-1919 ,J:342607 ,C1QC
+MGI:88225,C1qc,"complement component 1, q subcomponent, C chain",4,,"complement activation, classical pathway",,,ISO,P02747 ,J:164563 ,C1QC
+MGI:88225,C1qc,"complement component 1, q subcomponent, C chain",4,,"complement activation, classical pathway",,,NAS,,J:320127 ,C1QC
+MGI:1355313,C1ra,"complement component 1, r subcomponent A",6,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C1RA
+MGI:3779804,C1rb,"complement component 1, r subcomponent B",6,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C1RB
+MGI:2660692,C1rl,"complement component 1, r subcomponent-like",6,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C1RL
+MGI:1355312,C1s1,"complement component 1, s subcomponent 1",6,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C1S1
+MGI:3644269,C1s2,"complement component 1, s subcomponent 2",6,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C1S2
+MGI:88226,C2,complement C2,17,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C2
+MGI:88227,C3,complement component 3,17,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C3
+MGI:88228,C4b,complement C4B (Chido blood group),17,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C4B
+MGI:88229,C4bp,complement component 4 binding protein,1,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C4BP
+MGI:88229,C4bp,complement component 4 binding protein,1,,"negative regulation of complement activation, classical pathway",,,IBA,O02839 P04003 P17927 PTN008569518 ,J:161428 ,C4BP
+MGI:88229,C4bp,complement component 4 binding protein,1,,"negative regulation of complement activation, classical pathway",,,ISO,P04003 ,J:164563 ,C4BP
+MGI:2668347,C8a,"complement component 8, alpha polypeptide",4,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C8A
+MGI:88236,C8b,"complement component 8, beta polypeptide",4,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C8B
+MGI:88237,C8g,"complement component 8, gamma polypeptide",2,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C8G
+MGI:1098282,C9,complement component 9,15,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,C9
+MGI:1203290,Cd46,"CD46 antigen, complement regulatory protein",1,,"negative regulation of complement activation, classical pathway",,,IBA,O02839 P04003 P17927 PTN008569518 ,J:161428 ,CD46
+MGI:104850,Cd55,"CD55 molecule, decay accelerating factor for complement",1,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,CD55
+MGI:104850,Cd55,"CD55 molecule, decay accelerating factor for complement",1,,"regulation of complement activation, classical pathway",,,IMP,MGI:2387405 ,J:52968 ,CD55
+MGI:104849,Cd55b,"CD55 molecule, decay accelerating factor for complement B",1,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,CD55B
+MGI:1096398,Cd81,CD81 antigen,7,,humoral immune response mediated by circulating immunoglobulin,,,ISO,P60033 ,J:164563 ,CD81
+MGI:1096398,Cd81,CD81 antigen,7,,humoral immune response mediated by circulating immunoglobulin,,,ISS,P60033 ,J:342587 ,CD81
+MGI:105937,Cfi,complement component factor i,3,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,CFI
+MGI:88513,Cr1l,complement C3b/C4b receptor 1 like,1,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,CR1L
+MGI:88513,Cr1l,complement C3b/C4b receptor 1 like,1,,"negative regulation of complement activation, classical pathway",,,IBA,O02839 P04003 P17927 PTN008569518 ,J:161428 ,CR1L
+MGI:88489,Cr2,complement receptor 2,1,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,CR2
+MGI:88489,Cr2,complement receptor 2,1,,"negative regulation of complement activation, classical pathway",,,IBA,O02839 P04003 P17927 PTN008569518 ,J:161428 ,CR2
+MGI:88512,Crp,"C-reactive protein, pentraxin-related",1,,"complement activation, classical pathway",,,ISO,RGD:2411 ,J:155856 ,CRP
+MGI:1349427,Exo1,exonuclease 1,1,,humoral immune response mediated by circulating immunoglobulin,,,IMP,MGI:2653925 ,J:87869 ,EXO1
+MGI:95497,Fcer2a,"Fc receptor, IgE, low affinity II, alpha polypeptide",8,,positive regulation of humoral immune response mediated by circulating immunoglobulin,,,IMP,MGI:3583003 ,J:19437 ,FCER2A
+MGI:95499,Fcgr2b,"Fc receptor, IgG, low affinity IIb",1,,negative regulation of humoral immune response mediated by circulating immunoglobulin,,,IMP,MGI:1857166 ,J:102982 ,FCGR2B
+MGI:1916419,Fcmr,Fc fragment of IgM receptor,1,,humoral immune response mediated by circulating immunoglobulin,,,IMP,,J:190113 ,FCMR
+MGI:1347474,Foxj1,forkhead box J1,11,,negative regulation of humoral immune response mediated by circulating immunoglobulin,,,IMP,,J:100704 ,FOXJ1
+MGI:1932723,Gimap3,"GTPase, IMAP family member 3",6,,positive regulation of humoral immune response mediated by circulating immunoglobulin,,,ISO,RGD:628871 ,J:155856 ,GIMAP3
+MGI:2442232,Gimap5,"GTPase, IMAP family member 5",6,,positive regulation of humoral immune response mediated by circulating immunoglobulin,,,ISO,RGD:628871 ,J:155856 ,GIMAP5
+MGI:96031,Hc,hemolytic complement,2,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,HC
+MGI:105112,Hpx,hemopexin,7,,positive regulation of humoral immune response mediated by circulating immunoglobulin,,,IMP,MGI:2447193 ,J:139247 ,HPX
+MGI:96449,Igh-7,immunoglobulin heavy chain 7 (heavy chain of IgE),12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:19437 ,IGH-7
+MGI:96449,Igh-7,immunoglobulin heavy chain 7 (heavy chain of IgE),12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:30239 ,IGH-7
+MGI:96450,Igh-8,immunoglobulin heavy chain 8 (heavy chain of IgG3),12,,"complement activation, classical pathway",,,IDA,,J:75709 ,IGH-8
+MGI:96450,Igh-8,immunoglobulin heavy chain 8 (heavy chain of IgG3),12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:107174 ,IGH-8
+MGI:96450,Igh-8,immunoglobulin heavy chain 8 (heavy chain of IgG3),12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:88910 ,IGH-8
+MGI:96444,Igha,immunoglobulin heavy constant alpha,12,,"complement activation, classical pathway",,,IBA,MGI:96443 MGI:96445 MGI:96446 PTN002759165 ,J:161428 ,IGHA
+MGI:96444,Igha,immunoglobulin heavy constant alpha,12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:107174 ,IGHA
+MGI:96444,Igha,immunoglobulin heavy constant alpha,12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:30239 ,IGHA
+MGI:96444,Igha,immunoglobulin heavy constant alpha,12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:88910 ,IGHA
+MGI:2685746,Ighe,Immunoglobulin heavy constant epsilon,12,,"complement activation, classical pathway",,,IBA,MGI:96443 MGI:96445 MGI:96446 PTN002759165 ,J:161428 ,IGHE
+MGI:2144967,Ighg,Immunoglobulin heavy chain (gamma polypeptide),12,,"complement activation, classical pathway",,,IBA,MGI:96443 MGI:96445 MGI:96446 PTN002759165 ,J:161428 ,IGHG
+MGI:96446,Ighg1,immunoglobulin heavy constant gamma 1 (G1m marker),12,,"complement activation, classical pathway",,,IBA,MGI:96443 MGI:96445 MGI:96446 PTN002759165 ,J:161428 ,IGHG1
+MGI:96446,Ighg1,immunoglobulin heavy constant gamma 1 (G1m marker),12,,"complement activation, classical pathway",,,IDA,,J:87227 ,IGHG1
+MGI:96446,Ighg1,immunoglobulin heavy constant gamma 1 (G1m marker),12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:107174 ,IGHG1
+MGI:96446,Ighg1,immunoglobulin heavy constant gamma 1 (G1m marker),12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:115034 ,IGHG1
+MGI:96446,Ighg1,immunoglobulin heavy constant gamma 1 (G1m marker),12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:19437 ,IGHG1
+MGI:96446,Ighg1,immunoglobulin heavy constant gamma 1 (G1m marker),12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:30239 ,IGHG1
+MGI:96446,Ighg1,immunoglobulin heavy constant gamma 1 (G1m marker),12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:65439 ,IGHG1
+MGI:96446,Ighg1,immunoglobulin heavy constant gamma 1 (G1m marker),12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:88910 ,IGHG1
+MGI:96446,Ighg1,immunoglobulin heavy constant gamma 1 (G1m marker),12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:96035 ,IGHG1
+MGI:96443,Ighg2a,immunoglobulin heavy constant gamma 2A,12,,"complement activation, classical pathway",,,IBA,MGI:96443 MGI:96445 MGI:96446 PTN002759165 ,J:161428 ,IGHG2A
+MGI:96443,Ighg2a,immunoglobulin heavy constant gamma 2A,12,,"complement activation, classical pathway",,,IDA,,J:75709 ,IGHG2A
+MGI:96443,Ighg2a,immunoglobulin heavy constant gamma 2A,12,,"complement activation, classical pathway",,,IDA,,J:87227 ,IGHG2A
+MGI:96443,Ighg2a,immunoglobulin heavy constant gamma 2A,12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:107174 ,IGHG2A
+MGI:96445,Ighg2b,immunoglobulin heavy constant gamma 2B,12,,"complement activation, classical pathway",,,IBA,MGI:96443 MGI:96445 MGI:96446 PTN002759165 ,J:161428 ,IGHG2B
+MGI:96445,Ighg2b,immunoglobulin heavy constant gamma 2B,12,,"complement activation, classical pathway",,,IDA,,J:75709 ,IGHG2B
+MGI:96445,Ighg2b,immunoglobulin heavy constant gamma 2B,12,,"complement activation, classical pathway",,,IDA,,J:87227 ,IGHG2B
+MGI:96445,Ighg2b,immunoglobulin heavy constant gamma 2B,12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:107174 ,IGHG2B
+MGI:96445,Ighg2b,immunoglobulin heavy constant gamma 2B,12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:19437 ,IGHG2B
+MGI:96445,Ighg2b,immunoglobulin heavy constant gamma 2B,12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:88910 ,IGHG2B
+MGI:2686979,Ighg2c,immunoglobulin heavy constant gamma 2C,12,,"complement activation, classical pathway",,,IBA,MGI:96443 MGI:96445 MGI:96446 PTN002759165 ,J:161428 ,IGHG2C
+MGI:2686979,Ighg2c,immunoglobulin heavy constant gamma 2C,12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:115034 ,IGHG2C
+MGI:2686979,Ighg2c,immunoglobulin heavy constant gamma 2C,12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:65439 ,IGHG2C
+MGI:2144790,Ighg3,Immunoglobulin heavy constant gamma 3,12,,"complement activation, classical pathway",,,IBA,MGI:96443 MGI:96445 MGI:96446 PTN002759165 ,J:161428 ,IGHG3
+MGI:96448,Ighm,immunoglobulin heavy constant mu,12,,"complement activation, classical pathway",,,IBA,MGI:96443 MGI:96445 MGI:96446 PTN002759165 ,J:161428 ,IGHM
+MGI:96448,Ighm,immunoglobulin heavy constant mu,12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:19437 ,IGHM
+MGI:96448,Ighm,immunoglobulin heavy constant mu,12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:30239 ,IGHM
+MGI:96448,Ighm,immunoglobulin heavy constant mu,12,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:88910 ,IGHM
+MGI:104797,Lta,lymphotoxin A,17,,positive regulation of humoral immune response mediated by circulating immunoglobulin,,,IGI,MGI:104798 ,J:115034 ,LTA
+MGI:1330832,Masp2,MBL associated serine protease 2,4,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,MASP2
+MGI:96923,Mbl1,mannose-binding lectin (protein A) 1,14,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,MBL1
+MGI:96924,Mbl2,mannose-binding lectin (protein C) 2,19,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,MBL2
+MGI:2429397,Nod2,nucleotide-binding oligomerization domain containing 2,8,,positive regulation of humoral immune response mediated by circulating immunoglobulin,,,IMP,MGI:3529594 ,J:96035 ,NOD2
+MGI:96055,Ptpn6,"protein tyrosine phosphatase, non-receptor type 6",6,,negative regulation of humoral immune response mediated by circulating immunoglobulin,,,IMP,MGI:1856074 ,J:42368 ,PTPN6
+MGI:97810,Ptprc,protein tyrosine phosphatase receptor type C,1,,positive regulation of humoral immune response mediated by circulating immunoglobulin,,,IMP,MGI:2181288 ,J:30239 ,PTPRC
+MGI:97810,Ptprc,protein tyrosine phosphatase receptor type C,1,,regulation of humoral immune response mediated by circulating immunoglobulin,,,IMP,MGI:2181288 ,J:37640 ,PTPRC
+MGI:894696,Serping1,"serine (or cysteine) peptidase inhibitor, clade G, member 1",2,,"complement activation, classical pathway",,,IEA,KW-0180 ,J:60000 ,SERPING1
+MGI:2138351,Susd4,sushi domain containing 4,1,,"negative regulation of complement activation, classical pathway",,,ISO,Q5VX71 ,J:164563 ,SUSD4
+MGI:104798,Tnf,tumor necrosis factor,17,,positive regulation of humoral immune response mediated by circulating immunoglobulin,,,IGI,MGI:104797 ,J:115034 ,TNF
+MGI:1913150,Trem2,triggering receptor expressed on myeloid cells 2,17,,"positive regulation of complement activation, classical pathway",,,IMP,,J:273253 ,TREM2
+MGI:99215,Zp3,zona pellucida glycoprotein 3,5,,humoral immune response mediated by circulating immunoglobulin,,,IDA,,J:170041 ,ZP3
+MGI:104965,Zp3r,zona pellucida 3 receptor,1,,"negative regulation of complement activation, classical pathway",,,IBA,O02839 P04003 P17927 PTN008569518 ,J:161428 ,ZP3R
+MGI:104965,Zp3r,zona pellucida 3 receptor,1,,"negative regulation of complement activation, classical pathway",,,ISO,P04003 ,J:164563 ,

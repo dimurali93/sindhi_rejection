@@ -1,6 +1,7 @@
 GCMarker = c( "CD38", "CD83","CXCR4","CXCR5","AICDA","IRF8","CD40","IGHG1")
 TFH = c("BCL6", "CXCR5", "ICOS", "IL21", "SH2D1A", "IRF4","PDCD1")
-humoralgenes<- read_csv("/home/divya/Misc/sindhi/GO_term_summary_20241031_140920.csv")
+# humoralgenes<- read_csv("/home/divya/Misc/sindhi/GO_term_summary_20241031_140920.csv")
+humoralgenes<- read_csv("./GO_term_summary_20241031_140920.csv")
 humoralgenes=data.frame(humoralgenes)
 humoralgenes = unique(unlist(humoralgenes[,"...12"]))
 TF_TFs = sets::as.set(c("CD4", "IL21", "PDCD1", "CXCR3", "CCR6", "ICOS", "IRF4", "BCL6", "CXCR5", "CXCL13", "IL4","ASCL2", "TCF", "MAF", "BATF"))

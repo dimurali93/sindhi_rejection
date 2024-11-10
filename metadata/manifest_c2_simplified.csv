@@ -1,0 +1,14 @@
+SubjectID,Outcome,orig.ident,DSA
+977,Rejector,CHS19-3245_02,yes
+977,Rejector,CHS19-3245_01,yes
+1011,Rejector,CHS20-5330_01,yes
+1011,Rejector,CHS20-5330_02,yes
+1029,Rejector,CHS21-1905_01,no
+1029,Rejector,CHS21-1905_02,no
+1033,Rejector,CHS21-2579,yes
+1039,Rejector,CHS21-4785,no
+991,Rejector,CHS19-7498,yes
+1025,Non-Rejector,CHS21-5518_01,no
+1025,Non-Rejector,CHS21-5518_02,no
+1073,Non-Rejector,CHS22-1363,yes
+198,Rejector,CHS20-8247,yes
