@@ -1,7 +1,9 @@
-# visium_c1 <- readRDS("~/Misc/sindhi/sindhiAll/FINALANALYSIS/Sindhi_Visium_FFPE_5R&2NR_C1/visium_c1.rds")
-# visium_c2 <- readRDS("~/Misc/sindhi/sindhiAll/FINALANALYSIS/visium_c2/integrated_C2_subset_sct (1).RDS")
-visium_c1 <- readRDS("/ix1/rsindhi/dim95/Rprojects/sindhi_rejection/visium_c1/visiumc1.rds")
+source("./1.library.R", echo=TRUE)
 
+visium_c1 <- readRDS("~/Misc/sindhi/sindhiAll/FINALANALYSIS/Sindhi_Visium_FFPE_5R&2NR_C1/visiumc1.rds")
+visium_c2 <- readRDS("~/Misc/sindhi/sindhiAll/FINALANALYSIS/visiumc2/integrated_C2_subset_sct (1).RDS")
+
+visium_c1 <- readRDS("/ix1/rsindhi/dim95/Rprojects/sindhi_rejection/visium_c1/visiumc1.rds")
 visium_c2 <- readRDS("/ix1/rsindhi/dim95/Rprojects/sindhi_rejection/visium_c2/integrated_C2_subset_sct.RDS")
 
 
@@ -117,6 +119,81 @@ markers_visiumc1c2_rejection_seu_label =FindAllMarkers(integrated,logfc.threshol
 write.csv(markers_visiumc1c2_rejection_seu_label,"./DEGList/Markers_Visiumc1c2_rejection_seu_label_LFC.25_pval0.05.csv")
 
 
+integrated$seu_label_dsa = paste0(integrated$seu_label,"_",integrated$DSA)
+Idents(integrated)="seu_label_dsa"
+DEG_5_Glul=FindMarkers(integrated,ident.1 = "5_GLUL_yes",ident.2 = "5_GLUL_no")%>%
+  # filter(p_val_adj<0.05)%>%
+  filter(p_val<0.05)%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_5_glul_DSAvNoDSA")
+
+DEG_3_mid=FindMarkers(integrated,ident.1 = "3_mid_yes",ident.2 = "3_mid_no")%>%
+  # filter(p_val_adj<0.05)%>%
+  filter(p_val<0.05)%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_3_mid_DSAvNoDSA")
+
+
+DEG_2_mid=FindMarkers(integrated,ident.1 = "2_mid_yes",ident.2 = "2_mid_no")%>%
+  # filter(p_val_adj<0.05)%>%
+  filter(p_val<0.05)%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_2_mid_DSAvNoDSA")
+
+DEG_4_Cholangiocyte=FindMarkers(integrated,ident.1 = "4_Cholangiocyte_yes",ident.2 = "4_Cholangiocyte_no")%>%
+  # filter(p_val_adj<0.05)%>%
+  filter(p_val<0.05)%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_4_Cholangiocyte_DSAvNoDSA")
+
+
+DEG_0_GLUL=FindMarkers(integrated,ident.1 = "0_GLUL_yes",ident.2 = "0_GLUL_no")%>%
+  # filter(p_val_adj<0.05)%>%
+  filter(p_val<0.05)%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_0_GLUL_DSAvNoDSA")
+
+DEG_1_mid=FindMarkers(integrated,ident.1 = "1_mid_yes",ident.2 = "1_mid_no")%>%
+  # filter(p_val_adj<0.05)%>%
+  filter(p_val<0.05)%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_1_mid_DSAvNoDSA")
+
+
+DEG_6_mid=FindMarkers(integrated,ident.1 = "6_mid_yes",ident.2 = "6_mid_no")%>%
+  # filter(p_val_adj<0.05)%>%
+  filter(p_val<0.05)%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_6_mid_DSAvNoDSA")
+
+DEG_7_mid=FindMarkers(integrated,ident.1 = "7_mid_yes",ident.2 = "7_mid_no")%>%
+  # filter(p_val_adj<0.05)%>%
+  filter(p_val<0.05)%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_7_mid_DSAvNoDSA")
+
+
+
+
+
+DEG_all_seu_label <- rbind(DEG_0_GLUL, DEG_1_mid, DEG_2_mid, DEG_3_mid, DEG_4_Cholangiocyte,DEG_5_Glul, DEG_6_mid, DEG_7_mid)
+source("./GeneList.R")
+Restricted_DEGs_visium_c1c2_rejector_DSAvNoDSA_seu_label <- DEG_all_seu_label %>%
+  mutate(
+    TFH = ifelse(rowname %in% TFH, "TFH", NA),
+    GC = ifelse(rowname %in% GCMarker, "GC", NA),
+    HumoralImmunity = ifelse(rowname %in% humoralgenes, "HumoralImmunity", NA),
+    GC_TFs = ifelse(rowname %in% GC_TFs, "GC_TFs", NA),
+    TF_TFs = ifelse(rowname %in% TF_TFs, "TF_TFs", NA),
+    GCZones = ifelse(rowname %in% GCZones, "GCZones", NA),
+    cd40Signaling = ifelse(rowname %in% cd40Signaling, "cd40Signaling", NA),
+    nfkbactivation = ifelse(rowname %in% nfkbactivation, "nfkbactivation", NA),
+    ProliferationdarkZoneBcells = ifelse(rowname %in% ProliferationdarkZoneBcells, "ProliferationdarkZoneBcells", NA),
+    otherMarkers = ifelse(rowname %in% otherMarkers, "otherMarkers", NA),
+    calciumsignaling = ifelse(rowname %in% calciumsignaling, "calciumsignaling", NA),
+    BCRgenes = ifelse(rowname %in% BCRgenes, "BCRgenes", NA),
+    memoryBcells = ifelse(rowname %in% memoryBcells, "memoryBcells", NA)
+  )
+
+
+
+# write.csv(RestrictedList,"./Misc/sindhi/DEG_all_visumc1c2_rdsaVsNoDSA_restrictedList.csv")
+write.csv(Restricted_DEGs_visium_c1c2_rejector_DSAvNoDSA_seu_label,"./DEGList/DEGs_visium_c1c2_rejector_seu_label_DSAvNoDSA_LFC.25_pval.05.csv")
+
+
+
 Idents(integrated)="label"
 markers_visiumc1c2_rejection_label =FindAllMarkers(integrated,logfc.threshold = .25, only.pos = TRUE)%>%filter(p_val<0.05)
 write.csv(markers_visiumc1c2_rejection_label,"./DEGList/Markers_Visiumc1c2_rejection_label_LFC.25_pval0.05.csv")
@@ -135,10 +212,10 @@ DEG_mid=FindMarkers(integrated,ident.1 = "yes_mid",ident.2 = "no_mid")%>%
   # filter(p_val_adj<0.05)%>%
   filter(p_val<0.05)%>%
   filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_mid_DSAvNoDSA")
-DEG_all=rbind(DEG_Glul,rbind(DEG_Cholangiocyte,DEG_mid))
+DEG_all_label=rbind(DEG_Glul,rbind(DEG_Cholangiocyte,DEG_mid))
 
 source("./GeneList.R")
-Restricted_DEGs_visium_c1c2_rejector_DSAvNoDSA <- DEG_all %>%
+Restricted_DEGs_visium_c1c2_rejector_DSAvNoDSA_label <- DEG_all_label %>%
   mutate(
     TFH = ifelse(rowname %in% TFH, "TFH", NA),
     GC = ifelse(rowname %in% GCMarker, "GC", NA),
@@ -162,10 +239,10 @@ Restricted_DEGs_visium_c1c2_rejector_DSAvNoDSA <- DEG_all %>%
 # colnames(RestrictedList)=c("Gene","p_val","avg_log2FC","pct.1", "pct.2","p_val_adj","cluster", "HumoralImmunity","TFH","GC")
 
 # write.csv(RestrictedList,"./Misc/sindhi/DEG_all_visumc1c2_rdsaVsNoDSA_restrictedList.csv")
-write.csv(Restricted_DEGs_visium_c1c2_rejector_DSAvNoDSA,"./DEGList/DEGs_visium_c1c2_rejector_DSAvNoDSA_LFC.25_pval.05.csv")
+write.csv(Restricted_DEGs_visium_c1c2_rejector_DSAvNoDSA_label,"./DEGList/DEGs_visium_c1c2_rejector_lable_DSAvNoDSA_LFC.25_pval.05.csv")
 
 # write.csv(DEG_all,"./Misc/sindhi/DEG_all_visumc1c2_rdsaVsNoDSA.csv")
-write.csv(DEG_all,"./Misc/sindhi/DEG_all_visumc1c2_rdsaVsNoDSA_LFC0.25_pval0.05.csv")
+# write.csv(DEG_all,"./Misc/sindhi/DEG_all_visumc1c2_rdsaVsNoDSA_LFC0.25_pval0.05.csv")
 
 
 Idents(integrated)="label"
