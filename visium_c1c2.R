@@ -34,18 +34,18 @@ merged=  NormalizeData(merged)
 merged =   FindVariableFeatures(merged,nfeatures = 3000)
 merged = ScaleData(merged)
 
-merged1@meta.data$Outcome <- gsub(
+merged@meta.data$Outcome <- gsub(
   pattern = "^Non-Rejector$",
   replacement = "NonRejector",
-  merged1@meta.data$Outcome
+  merged@meta.data$Outcome
 )
-spe_cat <-as.SingleCellExperiment(merged1)
-spe_cat <- merged1
+spe_cat <-as.SingleCellExperiment(merged)
+spe_cat <- merged
 spe_cat <- JoinLayers(spe_cat, assay = "Spatial")
-spe_cat$sample_id <- factor(merged1$orig.ident)
-spe_cat$condition <- factor(merged1$Outcome)
-spe_cat$cluster_id <- factor(merged1$batch)
-spe_cat$DSA <- factor(merged1$DSA)
+spe_cat$sample_id <- factor(merged$orig.ident)
+spe_cat$condition <- factor(merged$Outcome)
+spe_cat$cluster_id <- factor(merged$batch)
+spe_cat$DSA <- factor(merged$DSA)
 spe_cat1=as.SingleCellExperiment(spe_cat)
 # # Add celltype information to metadata
 metadata(spe_cat1)$cluster_codes <- data.frame(celltype = factor(spe_cat1$orig.ident))
@@ -103,44 +103,52 @@ anchors <- FindIntegrationAnchors(object.list = visiumc1c2_rejection_3,
                                   normalization.method = "LogNormalize",
                                   anchor.features = features,
                                   reduction = "cca")
-integrated <- IntegrateData(anchorset = anchors,k.weight = 70)
-DefaultAssay(integrated) <- "integrated"
 
+integrated <- IntegrateData(anchorset = anchors)
+# DefaultAssay(integrated) <- "integrated"
 integrated <- integrated %>%
   ScaleData() %>%
   RunPCA(npcs = 10) %>%
   RunUMAP(reduction = "pca", dims = 1:10) %>%
-  FindNeighbors(reduction = "pca", dims = 1:10)
+  FindNeighbors(reduction = "pca", dims = 1:10)%>%
+  FindClusters(resolution = 0.5)
 
-Idents(integrated)="seurat_clusters"
-
-DimPlot(integrated,split.by = "seurat_clusters")
-FeaturePlot(integrated, features = c("GLUL","ASS1"))
-SpatialDimPlot(integrated,crop = FALSE,ncol = 3)
-DefaultAssay(integrated)<-"Spatial"
-
-Idents(integrated)="seurat_clusters"
-Idents(integrated)="label"
-DotPlot(integrated, features =c( "GLUL", "ASS1","KRT7","SOX9","SCTR","AQP1","CFTR"))+
+DotPlot(integrated, features =c( "GLUL", "ASS1","KRT7","SOX9","SCTR","AQP1","CFTR"),group.by = "seurat_clusters", assay ="Spatial")+
   scale_colour_gradient2(low = "blue", mid = "white", high = "red")
+
+
+DimPlot(integrated,group.by  = "seurat_clusters")
+FeaturePlot(integrated, features = c("GLUL","ASS1"))
+
+Idents(integrated)="seurat_clusters"
 SpatialDimPlot(integrated,crop = FALSE,ncol = 3)
+
+RidgePlot(integrated, features = "GLUL", ncol = 2,group.by = "seurat_clusters")+ geom_vline(aes(xintercept = 2.5),colour = "red")
+VlnPlot(integrated, features = "GLUL", ncol = 2,group.by = "seurat_clusters")+geom_boxplot()+ geom_hline(aes(yintercept = 2.5),colour = "red")
+
+RidgePlot(integrated, features = c("KRT7","SOX9","SCTR","AQP1","CFTR"), ncol = 2,group.by = "seurat_clusters")
+VlnPlot(integrated, features = c("KRT7","SOX9","SCTR","AQP1","CFTR"), ncol = 2,group.by = "seurat_clusters",  combine = TRUE)+geom_boxplot()
+
+RidgePlot(integrated, features = "ASS1", ncol = 2,group.by = "seurat_clusters")
+VlnPlot(integrated, features = "ASS1", ncol = 2,group.by = "seurat_clusters")+geom_boxplot()
+
 integrated$seurat_clusters <- as.factor(as.numeric(as.character(integrated$seurat_clusters)))
 Idents(integrated) <- "seurat_clusters"
 levels(integrated)
-new_ids <- c("GLUL",
-             "mid",
-             "mid",
-             "mid",
-             "Cholangiocyte",
+new_ids <- c("IntraLobularRegion",
+             "IntraLobularRegion",
+             "IntraLobularRegion",
              "GLUL",
-             "mid",
-             "mid")
+             "Cholangiocyte","Cholangiocyte","IntraLobularRegion",
+             "Cholangiocyte")
 names(new_ids) <- levels(integrated)
 integrated <- RenameIdents(integrated, new_ids)
 integrated$label <- Idents(integrated)
-DimPlot(integrated,label = T)
+DimPlot(integrated,label = T, group.by = "seurat_clusters",split.by = "label")
+
 Idents(integrated)="DSA"
 integrated = JoinLayers(integrated)
+
 
 integrated$seu_label = paste0(integrated$seurat_clusters,"_",integrated$label)
 Idents(integrated)="seu_label"
