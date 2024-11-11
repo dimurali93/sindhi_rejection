@@ -33,6 +33,36 @@ merged <- RenameCells(merged,
 merged=  NormalizeData(merged)
 merged =   FindVariableFeatures(merged,nfeatures = 3000)
 merged = ScaleData(merged)
+
+merged1@meta.data$Outcome <- gsub(
+  pattern = "^Non-Rejector$",
+  replacement = "NonRejector",
+  merged1@meta.data$Outcome
+)
+spe_cat <-as.SingleCellExperiment(merged1)
+spe_cat <- merged1
+spe_cat <- JoinLayers(spe_cat, assay = "Spatial")
+spe_cat$sample_id <- factor(merged1$orig.ident)
+spe_cat$condition <- factor(merged1$Outcome)
+spe_cat$cluster_id <- factor(merged1$batch)
+spe_cat$DSA <- factor(merged1$DSA)
+spe_cat1=as.SingleCellExperiment(spe_cat)
+# # Add celltype information to metadata
+metadata(spe_cat1)$cluster_codes <- data.frame(celltype = factor(spe_cat1$orig.ident))
+C2_MDS_1 = pbMDS(spe_cat1,
+                 by = "sample_id",assay = "counts" ,
+                 shape_by = "DSA", size_by = TRUE,
+                 label_by = "sample_id",  dims = c(1,2),
+                 k = "celltype") +
+  scale_color_manual(values = c(1,2,3,4,5,6,7,8,9,10,11,12,13)) +
+  theme(legend.position="right", aspect.ratio=1)
+C2_MDS_1
+# C2_MDS_1 = pbMDS(spe_cat1,
+#                  by = "sample_id",assay = "counts" ,
+#                  label_by = "sample_id",
+#                  k = "celltype") +
+#   scale_color_manual(values = c(1,2,3,4,5,6,7,8,9,10,11,12,13)) +
+#   theme(legend.position="right")
 Idents(merged) <- "Outcome"
 merged_rejector = subset(merged, idents ="Rejector")
 Idents(merged_rejector) <- "orig.ident"
