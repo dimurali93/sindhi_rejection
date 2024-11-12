@@ -1,7 +1,5 @@
 rm(list = ls())
-
 source("./1.library.R")
-# visium_c2 <- readRDS("./visium_c2/integrated_C2_subset_sct.RDS")
 
 # set directory for raw files
 SP_RD_Path = "/ix1/rsindhi/dim95/RawData/Visium_Transplant_c2/SpaceRanger_OUT/"
