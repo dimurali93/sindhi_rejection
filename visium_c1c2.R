@@ -1,7 +1,7 @@
 source("./1.library.R", echo=TRUE)
 
-visium_c1 <- readRDS("~/Misc/sindhi/sindhiAll/FINALANALYSIS/Sindhi_Visium_FFPE_5R&2NR_C1/visiumc1.rds")
-visium_c2 <- readRDS("~/Misc/sindhi/sindhiAll/FINALANALYSIS/visiumc2/integrated_C2_subset_sct (1).RDS")
+visium_c1 <- readRDS("./visium_c1/visiumc1.rds")
+visium_c2 <- readRDS("./visium_c2/integrated_C2_subset_sct (1).RDS")
 
 visium_c1 <- readRDS("/ix1/rsindhi/dim95/Rprojects/sindhi_rejection/visium_c1/visiumc1.rds")
 visium_c2 <- readRDS("/ix1/rsindhi/dim95/Rprojects/sindhi_rejection/visium_c2/integrated_C2_subset_sct.RDS")
@@ -74,8 +74,10 @@ markers <- dplyr::filter(markers,
                          p_val_adj < 0.01)
 
 
+
 visiumc1c2_rejection <- visiumc1c2_rejection[names(visiumc1c2_rejection) %in% unique(merged_rejector$orig.ident)]
 
+visiumc1c2_rejection[["CHS20-600A"]] <- NULL
 
 visiumc1c2_rejection_2 <- lapply(X = visiumc1c2_rejection, FUN = function(data) {
   data <- data %>%
@@ -116,6 +118,7 @@ integrated <- integrated %>%
 DotPlot(integrated, features =c( "GLUL", "ASS1","KRT7","SOX9","SCTR","AQP1","CFTR"),group.by = "seurat_clusters", assay ="Spatial")+
   scale_colour_gradient2(low = "blue", mid = "white", high = "red")
 
+DimPlot(integrated,group.by  = "seurat_clusters",split.by = "orig.ident")
 
 DimPlot(integrated,group.by  = "seurat_clusters")
 FeaturePlot(integrated, features = c("GLUL","ASS1"))
@@ -130,7 +133,7 @@ RidgePlot(integrated, features = c("KRT7","SOX9","SCTR","AQP1","CFTR"), ncol = 2
 VlnPlot(integrated, features = c("KRT7","SOX9","SCTR","AQP1","CFTR"), ncol = 2,group.by = "seurat_clusters",  combine = TRUE)+geom_boxplot()
 
 RidgePlot(integrated, features = "ASS1", ncol = 2,group.by = "seurat_clusters")
-VlnPlot(integrated, features = "ASS1", ncol = 2,group.by = "seurat_clusters")+geom_boxplot()
+VlnPlot(integrated, features = "ASS1", ncol = 2,group.by = "seurat_clusters")+geom_boxplot()+ geom_hline(aes(yintercept = 3),colour = "red")
 
 integrated$seurat_clusters <- as.factor(as.numeric(as.character(integrated$seurat_clusters)))
 Idents(integrated) <- "seurat_clusters"
@@ -138,77 +141,67 @@ levels(integrated)
 new_ids <- c("IntraLobularRegion",
              "IntraLobularRegion",
              "IntraLobularRegion",
+             "Cholangiocyte",
              "GLUL",
-             "Cholangiocyte","Cholangiocyte","IntraLobularRegion",
-             "Cholangiocyte")
+             "Cholangiocyte","IntraLobularRegion","IntraLobularRegion",
+             "IntraLobularRegion")
 names(new_ids) <- levels(integrated)
 integrated <- RenameIdents(integrated, new_ids)
 integrated$label <- Idents(integrated)
 DimPlot(integrated,label = T, group.by = "seurat_clusters",split.by = "label")
+DimPlot(integrated,label = T, group.by = "seurat_clusters")
+
+SpatialDimPlot(integrated,crop = FALSE,ncol = 3, group.by = "label")
 
 Idents(integrated)="DSA"
-integrated = JoinLayers(integrated)
-
 
 integrated$seu_label = paste0(integrated$seurat_clusters,"_",integrated$label)
 Idents(integrated)="seu_label"
-
 markers_visiumc1c2_rejection_seu_label =FindAllMarkers(integrated,logfc.threshold = .25, only.pos = TRUE)%>%filter(p_val<0.05)
 write.csv(markers_visiumc1c2_rejection_seu_label,"./DEGList/Markers_Visiumc1c2_rejection_seu_label_LFC.25_pval0.05.csv")
 
+Idents(integrated)="label"
+markers_visiumc1c2_rejection_label =FindAllMarkers(integrated,logfc.threshold = .25, only.pos = TRUE)%>%filter(p_val<0.05)
+write.csv(markers_visiumc1c2_rejection_label,"./DEGList/Markers_Visiumc1c2_rejection_label_LFC.25_pval0.05.csv")
 
 integrated$seu_label_dsa = paste0(integrated$seu_label,"_",integrated$DSA)
 Idents(integrated)="seu_label_dsa"
-DEG_5_Glul=FindMarkers(integrated,ident.1 = "5_GLUL_yes",ident.2 = "5_GLUL_no")%>%
+DEG_0_IntraLobularRegion=FindMarkers(integrated,ident.1 = "0_IntraLobularRegion_yes",ident.2 = "0_IntraLobularRegion_no")%>%
   # filter(p_val_adj<0.05)%>%
   filter(p_val<0.05)%>%
-  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_5_glul_DSAvNoDSA")
-
-DEG_3_mid=FindMarkers(integrated,ident.1 = "3_mid_yes",ident.2 = "3_mid_no")%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_0_IntraLobularRegion_DSAvNoDSA")
+DEG_1_IntraLobularRegion=FindMarkers(integrated,ident.1 = "1_IntraLobularRegion_yes",ident.2 = "1_IntraLobularRegion_no")%>%
   # filter(p_val_adj<0.05)%>%
   filter(p_val<0.05)%>%
-  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_3_mid_DSAvNoDSA")
-
-
-DEG_2_mid=FindMarkers(integrated,ident.1 = "2_mid_yes",ident.2 = "2_mid_no")%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_1_IntraLobularRegion_DSAvNoDSA")
+DEG_2_IntraLobularRegion=FindMarkers(integrated,ident.1 = "2_IntraLobularRegion_yes",ident.2 = "2_IntraLobularRegion_no")%>%
   # filter(p_val_adj<0.05)%>%
   filter(p_val<0.05)%>%
-  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_2_mid_DSAvNoDSA")
-
-DEG_4_Cholangiocyte=FindMarkers(integrated,ident.1 = "4_Cholangiocyte_yes",ident.2 = "4_Cholangiocyte_no")%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_2_IntraLobularRegion_DSAvNoDSA")
+DEG_3_Cholangiocyte=FindMarkers(integrated,ident.1 = "3_Cholangiocyte_yes",ident.2 = "3_Cholangiocyte_no")%>%
   # filter(p_val_adj<0.05)%>%
   filter(p_val<0.05)%>%
-  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_4_Cholangiocyte_DSAvNoDSA")
-
-
-DEG_0_GLUL=FindMarkers(integrated,ident.1 = "0_GLUL_yes",ident.2 = "0_GLUL_no")%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_3_Cholangiocyte_DSAvNoDSA")
+DEG_4_GLUL=FindMarkers(integrated,ident.1 = "4_GLUL_yes",ident.2 = "4_GLUL_no")%>%
   # filter(p_val_adj<0.05)%>%
   filter(p_val<0.05)%>%
-  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_0_GLUL_DSAvNoDSA")
-
-DEG_1_mid=FindMarkers(integrated,ident.1 = "1_mid_yes",ident.2 = "1_mid_no")%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_4_GLUL_DSAvNoDSA")
+DEG_5_Cholangiocyte=FindMarkers(integrated,ident.1 = "5_Cholangiocyte_yes",ident.2 = "5_Cholangiocyte_no")%>%
   # filter(p_val_adj<0.05)%>%
   filter(p_val<0.05)%>%
-  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_1_mid_DSAvNoDSA")
-
-
-DEG_6_mid=FindMarkers(integrated,ident.1 = "6_mid_yes",ident.2 = "6_mid_no")%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_5_Cholangiocyte_DSAvNoDSA")
+DEG_6_IntraLobularRegion=FindMarkers(integrated,ident.1 = "6_IntraLobularRegion_yes",ident.2 = "6_IntraLobularRegion_no")%>%
   # filter(p_val_adj<0.05)%>%
   filter(p_val<0.05)%>%
-  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_6_mid_DSAvNoDSA")
-
-DEG_7_mid=FindMarkers(integrated,ident.1 = "7_mid_yes",ident.2 = "7_mid_no")%>%
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_6_IntraLobularRegion_DSAvNoDSA")
+=FindMarkers(integrated,ident.1 = "7_IntraLobularRegion_yes",ident.2 = "7_IntraLobularRegion_no")%>%
   # filter(p_val_adj<0.05)%>%
   filter(p_val<0.05)%>%
-  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_7_mid_DSAvNoDSA")
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_7_IntraLobularRegion_DSAvNoDSA")
 
-
-
-
-
-DEG_all_seu_label <- rbind(DEG_0_GLUL, DEG_1_mid, DEG_2_mid, DEG_3_mid, DEG_4_Cholangiocyte,DEG_5_Glul, DEG_6_mid, DEG_7_mid)
+DEG_seu_label_dsa<- rbind(DEG_0_IntraLobularRegion, DEG_1_IntraLobularRegion, DEG_2_IntraLobularRegion, DEG_3_Cholangiocyte, DEG_4_GLUL,DEG_5_Cholangiocyte, DEG_6_IntraLobularRegion, DEG_7_IntraLobularRegion)
 source("./GeneList.R")
-Restricted_DEGs_visium_c1c2_rejector_DSAvNoDSA_seu_label <- DEG_all_seu_label %>%
+Restricted_DEGs_visium_c1c2_rejector_DEG_seu_label_DSAvNoDSA <- DEG_seu_label_dsa %>%
   mutate(
     TFH = ifelse(rowname %in% TFH, "TFH", NA),
     GC = ifelse(rowname %in% GCMarker, "GC", NA),
@@ -228,29 +221,24 @@ Restricted_DEGs_visium_c1c2_rejector_DSAvNoDSA_seu_label <- DEG_all_seu_label %>
 
 
 # write.csv(RestrictedList,"./Misc/sindhi/DEG_all_visumc1c2_rdsaVsNoDSA_restrictedList.csv")
-write.csv(Restricted_DEGs_visium_c1c2_rejector_DSAvNoDSA_seu_label,"./DEGList/DEGs_visium_c1c2_rejector_seu_label_DSAvNoDSA_LFC.25_pval.05.csv")
+write.csv(Restricted_DEGs_visium_c1c2_rejector_DEG_seu_label_DSAvNoDSA,"./DEGList/Restricted_DEGs_visium_c1c2_rejector_DEG_seu_label_DSAvNoDSA_LFC.25_pval.05.csv")
 
 
-
-Idents(integrated)="label"
-markers_visiumc1c2_rejection_label =FindAllMarkers(integrated,logfc.threshold = .25, only.pos = TRUE)%>%filter(p_val<0.05)
-write.csv(markers_visiumc1c2_rejection_label,"./DEGList/Markers_Visiumc1c2_rejection_label_LFC.25_pval0.05.csv")
-
-integrated$dsa_label = paste0(integrated$DSA,"_",integrated$label)
-Idents(integrated)="dsa_label"
-DEG_Glul=FindMarkers(integrated,ident.1 = "yes_GLUL",ident.2 = "no_GLUL")%>%
+integrated$label_dsa = paste0(integrated$label,"_",integrated$DSA)
+Idents(integrated)="label_dsa"
+DEG_Glul=FindMarkers(integrated,ident.1 = "GLUL_yes",ident.2 = "GLUL_no")%>%
   # filter(p_val_adj<0.05)%>%
   filter(p_val<0.05)%>%
   filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_glul_DSAvNoDSA")
-DEG_Cholangiocyte=FindMarkers(integrated,ident.1 = "yes_Cholangiocyte",ident.2 = "no_Cholangiocyte")%>%
+DEG_Cholangiocyte=FindMarkers(integrated,ident.1 = "Cholangiocyte_yes",ident.2 = "Cholangiocyte_no")%>%
   # filter(p_val_adj<0.05)%>%
   filter(p_val<0.05)%>%
   filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_cholangiocyte_DSAvNoDSA")
-DEG_mid=FindMarkers(integrated,ident.1 = "yes_mid",ident.2 = "no_mid")%>%
+DEG_IntraLobularRegion=FindMarkers(integrated,ident.1 = "IntraLobularRegion_yes",ident.2 = "IntraLobularRegion_no")%>%
   # filter(p_val_adj<0.05)%>%
   filter(p_val<0.05)%>%
-  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_mid_DSAvNoDSA")
-DEG_all_label=rbind(DEG_Glul,rbind(DEG_Cholangiocyte,DEG_mid))
+  filter(abs(avg_log2FC)>0.25)%>%rownames_to_column()%>%add_column(cluster ="visium_c1c2_rejector_IntraLobularRegion_DSAvNoDSA")
+DEG_all_label=rbind(DEG_Glul,DEG_Cholangiocyte,DEG_IntraLobularRegion)
 
 source("./GeneList.R")
 Restricted_DEGs_visium_c1c2_rejector_DSAvNoDSA_label <- DEG_all_label %>%
@@ -274,7 +262,6 @@ Restricted_DEGs_visium_c1c2_rejector_DSAvNoDSA_label <- DEG_all_label %>%
 # RestrictedList <- RestrictedList %>%
 #   filter(!if_all(all_of(c("group3","group2","group")), is.na))
 
-# colnames(RestrictedList)=c("Gene","p_val","avg_log2FC","pct.1", "pct.2","p_val_adj","cluster", "HumoralImmunity","TFH","GC")
 
 # write.csv(RestrictedList,"./Misc/sindhi/DEG_all_visumc1c2_rdsaVsNoDSA_restrictedList.csv")
 write.csv(Restricted_DEGs_visium_c1c2_rejector_DSAvNoDSA_label,"./DEGList/DEGs_visium_c1c2_rejector_lable_DSAvNoDSA_LFC.25_pval.05.csv")
@@ -291,3 +278,24 @@ DotPlot(integrated, features =c( "CD38", "CD83","CXCR4","CXCR5","AICDA","IRF8","
   scale_colour_gradient2(low = "blue", mid = "white", high = "red")
 
 DoHeatmap(integrated, features = c("CD38", "CD83","CXCR4","CXCR5","AICDA","IRF8","CD40","IGHG1"),assay = "integrated")
+
+markers_visiumc1c2_rejection_label %>%
+  group_by(cluster) %>%
+  dplyr::filter(avg_log2FC > 1) %>%
+  slice_head(n = 25) %>%
+  ungroup() -> top10
+Idents(integrated)="label"
+DoHeatmap(integrated, features = top10$gene) + NoLegend()
+
+
+markers_visiumc1c2_rejection_seu_label
+markers_visiumc1c2_rejection_seu_label %>%
+  group_by(cluster) %>%
+  dplyr::filter(avg_log2FC > 1) %>%
+  slice_head(n = 25) %>%
+  ungroup() -> top10
+Idents(integrated)="seu_label"
+DoHeatmap(integrated, features = top10$gene) + NoLegend()
+
+
+

@@ -364,9 +364,3 @@ commonwithCohot1c4 = DEconditionsversusNormal %>% filter(rowname %in% unique(c(c
   filter(p_val < 0.05) %>% filter(abs(avg_log2FC) > .25)
 # write.csv(commonwithCohot1c4, "commonwithCohot1c4.csv")
 
-gitcreds::gitcreds_set()
-library("usethis")
-
-library(gitcreds)
-git config --global user.email "dimurali@ucsd.edu"
-git config --global user.name "dimurali93"
